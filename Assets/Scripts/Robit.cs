@@ -26,7 +26,7 @@ public class Robit : MonoBehaviour
 		var shoot = Input.GetButton("Pew");
 		if (shoot && (bulletPrefab != null) && (gunBarrel != null) && ((timer <= 0) || Input.GetButtonDown("Pew")) )
 		{
-			Instantiate(bulletPrefab, gunBarrel.position, transform.rotation);
+			Instantiate(bulletPrefab, gunBarrel.position, transform.rotation, GameController.Instance.transform);
 			timer = SecBetweenBullets;
 		}
 	}
