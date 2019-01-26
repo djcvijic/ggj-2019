@@ -19,7 +19,8 @@ public class Robit : MonoBehaviour
 		var move = moveSpeed * Input.GetAxis("Shimmy");
 		transform.Rotate(Vector3.back, move);
 
-		var shoot = Input.GetButtonDown("Pew");
+		
+		var shoot = Input.GetButton("Pew");
 		if (shoot && bulletPrefab != null && gunBarrel != null)
 		{
 			Instantiate(bulletPrefab, gunBarrel.position, transform.rotation);
