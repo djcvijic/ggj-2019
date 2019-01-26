@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour 
+{
 	public float moveSpeed = 1;
 	public Vector2 screenBounds;
 	public GameObject explosionPrefab;
@@ -13,14 +14,19 @@ public class Enemy : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		transform.position += moveSpeed * transform.up;
-
-		var posX = transform.position.x;
-		var posY = transform.position.y;
-		if (posX < -screenBounds.x || posX > screenBounds.x || posY < -screenBounds.y || posY > screenBounds.y)
+	void Update () 
+	{
+		if (GameController.Instance.state == GameController.State.Running)
 		{
-			Destroy(gameObject);
+			transform.position += moveSpeed * transform.up;
+
+			var posX = transform.position.x;
+			var posY = transform.position.y;
+			if (posX < -screenBounds.x || posX > screenBounds.x || posY < -screenBounds.y || posY > screenBounds.y)
+			{
+				Destroy(gameObject);
+			}
+		
 		}
 	}
 

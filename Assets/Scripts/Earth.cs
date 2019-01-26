@@ -19,22 +19,27 @@ public class Earth : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		var moveH = moveSpeed * Input.GetAxis("Horizontal");
-		var moveV = moveSpeed * Input.GetAxis("Vertical");
-		transform.Translate(moveH, moveV, 0);
-
-		var pos = transform.position;
-		var posX = Mathf.Clamp(pos.x, -movementBounds.x, movementBounds.x);
-		var posY = Mathf.Clamp(pos.y, -movementBounds.y, movementBounds.y);
-		transform.position = new Vector3(posX, posY, 0);
-		if( EarthRotate != null)
+		if (GameController.Instance.state == GameController.State.Running)
 		{
-		EarthRotate.Rotate(0, 0, Zangle);
-		}
+			var moveH = moveSpeed * Input.GetAxis("Horizontal");
+			var moveV = moveSpeed * Input.GetAxis("Vertical");
+			transform.Translate(moveH, moveV, 0);
 
-		if (background != null)
-		{
-			background.position = -paralaxAmount * transform.position;
-		}
+			var pos = transform.position;
+			var posX = Mathf.Clamp(pos.x, -movementBounds.x, movementBounds.x);
+			var posY = Mathf.Clamp(pos.y, -movementBounds.y, movementBounds.y);
+			transform.position = new Vector3(posX, posY, 0);
+			if( EarthRotate != null)
+			{
+			EarthRotate.Rotate(0, 0, Zangle);
+			}
+
+			if (background != null)
+			{
+				background.position = -paralaxAmount * transform.position;
+			}
+
+		}	
+	
 	}
 }
