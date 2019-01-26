@@ -7,6 +7,7 @@ public class Earth : MonoBehaviour
 	public float moveSpeed = 1;
 	public Transform background;
 	public float paralaxAmount = 1;
+	public float Zangle = -1;
 	public Vector2 movementBounds;
 
 	// Use this for initialization
@@ -25,6 +26,7 @@ public class Earth : MonoBehaviour
 		var posX = Mathf.Clamp(pos.x, -movementBounds.x, movementBounds.x);
 		var posY = Mathf.Clamp(pos.y, -movementBounds.y, movementBounds.y);
 		transform.position = new Vector3(posX, posY, 0);
+		//transform.Rotate(0, 0, Zangle);
 
 		if (background != null)
 		{

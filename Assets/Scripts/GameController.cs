@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
 	public GameObject enemyPrefab;
 	public float spawnDistance = 1;
 	public Transform earth;
+	public int EarthLives = 3;
+	public bool GameOver = false;
 
 	public static GameController Instance;
 
@@ -39,6 +41,11 @@ public class GameController : MonoBehaviour
 	{
 		// TODO
 		Debug.Log("LifeLost");
+		EarthLives-=1;
+		if(EarthLives<=0)
+		{
+			GameOver=true;		// game over screen
+		} 
 	}
 
 	public void EnemyDestroyed()
