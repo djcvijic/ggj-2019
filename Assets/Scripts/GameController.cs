@@ -11,9 +11,11 @@ public class GameController : MonoBehaviour
 	public float spawnDistance = 1;
 	public Transform earth;
 	public int EarthLives = 3;
-	public bool GameOver = false;
 	public float difficultyCurveSpeed = 1;
 	public AnimationCurve difficultyCurve;
+
+	public enum State {Start, Running, GameOver};
+	public State state= State.Running;
 
 	public static GameController Instance;
 
@@ -26,6 +28,7 @@ public class GameController : MonoBehaviour
 		Instance = this;
 		timeSinceInitialization = 0;
 		timeSinceLastEnemy = 0;
+		state= State.Running;
 	}
 	
 	// Update is called once per frame
@@ -57,7 +60,7 @@ public class GameController : MonoBehaviour
 		EarthLives-=1;
 		if(EarthLives<=0)
 		{
-			GameOver=true;		// game over screen
+			state=State.GameOver;		// game over screen
 		} 
 	}
 

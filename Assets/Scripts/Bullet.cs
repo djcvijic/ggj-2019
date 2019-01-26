@@ -15,13 +15,16 @@ public class Bullet : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		transform.position += moveSpeed * transform.up;
-
-		var posX = transform.position.x;
-		var posY = transform.position.y;
-		if (posX < -screenBounds.x || posX > screenBounds.x || posY < -screenBounds.y || posY > screenBounds.y)
+		if (GameController.Instance.state == GameController.State.Running)
 		{
-			Destroy(gameObject);
+			transform.position += moveSpeed * transform.up;
+
+			var posX = transform.position.x;
+			var posY = transform.position.y;
+			if (posX < -screenBounds.x || posX > screenBounds.x || posY < -screenBounds.y || posY > screenBounds.y)
+			{
+				Destroy(gameObject);
+			}
 		}
 	}
 }

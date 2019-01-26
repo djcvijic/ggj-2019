@@ -19,15 +19,18 @@ public class Robit : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		var move = moveSpeed * Input.GetAxis("Shimmy");
-		transform.Rotate(Vector3.back, move);
-
-		timer -= Time.deltaTime;
-		var shoot = Input.GetButton("Pew");
-		if (shoot && (bulletPrefab != null) && (gunBarrel != null) && ((timer <= 0) || Input.GetButtonDown("Pew")) )
+		if (GameController.Instance.state == GameController.State.Running)
 		{
-			Instantiate(bulletPrefab, gunBarrel.position, transform.rotation, GameController.Instance.transform);
-			timer = SecBetweenBullets;
+			var move = moveSpeed * Input.GetAxis("Shimmy");
+			transform.Rotate(Vector3.back, move);
+
+			timer -= Time.deltaTime;
+			var shoot = Input.GetButton("Pew");
+			if (shoot && (bulletPrefab != null) && (gunBarrel != null) && ((timer <= 0) || Input.GetButtonDown("Pew")) )
+			{
+				Instantiate(bulletPrefab, gunBarrel.position, transform.rotation, GameController.Instance.transform);
+				timer = SecBetweenBullets;
+			}
 		}
 	}
 }
