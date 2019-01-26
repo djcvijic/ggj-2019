@@ -435,11 +435,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de698cef60beed4da4950450d6035f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnPeriod: 2
+  enemySpawnPeriod: 2.5
   enemyPrefab: {fileID: 1145711847095610, guid: d1c18931eba71a04b849f76dc4a4f420,
     type: 2}
   spawnDistance: 10
   earth: {fileID: 911904015}
+  difficultyCurveSpeed: 0.02
+  difficultyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.99857724
+      value: 0.7975455
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 4
 --- !u!4 &1117865427
 Transform:
   m_ObjectHideFlags: 0
@@ -496,6 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  SecBetweenBullets: 0.25
   bulletPrefab: {fileID: 1855011153307146, guid: 8f4b31326d3cc1645b0c7398a232b8f3,
     type: 2}
   gunBarrel: {fileID: 773104932}
