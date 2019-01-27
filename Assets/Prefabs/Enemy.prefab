@@ -156,3 +156,4 @@ MonoBehaviour:
   moveSpeed: 0.05
   screenBounds: {x: 16, y: 12}
   explosionPrefab: {fileID: 0}
+  maxLives: 1
