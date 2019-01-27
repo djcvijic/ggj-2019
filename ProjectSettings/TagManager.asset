@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Earth
   - Bullet
+  - Ulti
   layers:
   - Default
   - TransparentFX

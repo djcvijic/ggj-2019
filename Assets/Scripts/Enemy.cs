@@ -53,6 +53,11 @@ public class Enemy : MonoBehaviour
 			Destroy(other.gameObject);
 			LoseHealth();
 		}
+
+		if (other.CompareTag("Ulti"))
+		{
+			Die();
+		}
 	}
 
 	private void LoseHealth()
