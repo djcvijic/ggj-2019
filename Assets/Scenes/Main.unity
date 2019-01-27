@@ -1094,6 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de698cef60beed4da4950450d6035f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 519420032}
   enemySpawnPeriod: 2.5
   enemyPrefab: {fileID: 1145711847095610, guid: d1c18931eba71a04b849f76dc4a4f420,
     type: 2}
