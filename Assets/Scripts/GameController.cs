@@ -19,6 +19,9 @@ public class GameController : MonoBehaviour
 	public GameObject endCanvas;
 	public SpriteRenderer earthRenderer;
 	public List<Sprite> earthSprites;
+	public SpriteRenderer cover;
+	public float coverSustain = 1;
+	public float coverDecay = 1;
 
 	public enum State {Start, Running, GameOver}
 	[NonSerialized]
@@ -41,8 +44,12 @@ public class GameController : MonoBehaviour
 		currentLives = EarthLives;
 		earthRenderer.sprite = earthSprites[currentLives];
 		state = State.Start;
-		startCanvas.SetActive(true);
+		startCanvas.SetActive(false);
 		endCanvas.SetActive(false);
+		if (cover != null)
+		{
+			StartCoroutine(FadeOutCover());
+		}
 	}
 	
 	// Update is called once per frame
@@ -93,6 +100,20 @@ public class GameController : MonoBehaviour
 		{
 			GameOver();
 		} 
+	}
+
+	private IEnumerator FadeOutCover()
+	{
+		yield return new WaitForSeconds(coverSustain);
+		var fadeTime = 0f;
+		while (fadeTime < coverDecay)
+		{
+			fadeTime += Time.deltaTime;
+			var alpha = Mathf.Lerp(1, 0, fadeTime / coverDecay);
+			cover.color = new Color(cover.color.r, cover.color.g, cover.color.b, alpha);
+			yield return null;
+		}
+		startCanvas.SetActive(true);
 	}
 
 	private void GameOver() {

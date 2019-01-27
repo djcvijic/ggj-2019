@@ -67,7 +67,6 @@ public class Earth : MonoBehaviour
 	public void PlayExplosion()
 	{
 		if (audioSource != null) audioSource.Play();
-		transform.position.x = Mathf.Sin(Time.time * speed) * amount;
 	}
 
 	public void Shock(Vector3 pos ){
