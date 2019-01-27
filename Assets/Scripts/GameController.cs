@@ -15,7 +15,8 @@ public class GameController : MonoBehaviour
 	public int EarthLives = 3;
 	public float difficultyCurveSpeed = 1;
 	public AnimationCurve difficultyCurve;
-	public Text title;
+	public GameObject startCanvas;
+	public GameObject endCanvas;
 
 	public enum State {Start, Running, GameOver}
 	[NonSerialized]
@@ -35,7 +36,8 @@ public class GameController : MonoBehaviour
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
 		state = State.Start;
-		title.text = "Play";
+		startCanvas.SetActive(true);
+		endCanvas.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -61,21 +63,18 @@ public class GameController : MonoBehaviour
 				Instantiate(enemyPrefab, position3, rotation, transform);
 			}
 		}
-		else if (Instance.state == State.GameOver && Input.GetButtonDown("Fire1"))
+		else if (Instance.state == State.GameOver && Input.GetButtonDown("Pew"))
 		{
 			Restart();
 		}
 		else if (Instance.state == State.Start && Input.GetButtonDown("Pew"))
 		{
-			Instance.state = State.Running;
-			title.text = "";
+			RunTheAction();
 		}
 	}
 
 	public void LifeLost()
 	{
-		// TODO
-		Debug.Log("LifeLost");
 		currentLives-=1;
 		if(currentLives<=0)
 		{
@@ -85,11 +84,16 @@ public class GameController : MonoBehaviour
 
 	private void GameOver() {
 
-			state=State.GameOver;		// game over screen
-			title.text = "Game Over. Restart?";
+		state=State.GameOver;		// game over screen
+		startCanvas.SetActive(false);
+		endCanvas.SetActive(true);
 	}
 
-
+	public void BulletFired()
+	{
+		// TODO
+		Debug.Log("BulletFired");
+	}
 
 	public void EnemyDestroyed()
 	{
@@ -104,7 +108,13 @@ public class GameController : MonoBehaviour
 		timeSinceInitialization = 0;
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
+		RunTheAction();
+	}
+
+	private void RunTheAction()
+	{
 		state = State.Running;
-		title.text = "";
+		startCanvas.SetActive(false);
+		endCanvas.SetActive(false);
 	}
 }

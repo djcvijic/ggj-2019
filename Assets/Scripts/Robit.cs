@@ -39,6 +39,7 @@ public class Robit : MonoBehaviour
 			{
 				Instantiate(bulletPrefab, gunBarrel.position, transform.rotation, GameController.Instance.transform);
 				timer = SecBetweenBullets;
+				GameController.Instance.BulletFired();
 			}
 		}
 	}
