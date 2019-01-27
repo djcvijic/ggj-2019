@@ -6,26 +6,32 @@ public class Robit : MonoBehaviour
 {
 	public float moveSpeed = 1;
 	public float SecBetweenBullets = 0.25f;
+	public float ultiActive = 3f;
+	public float ultiCoolDown = 12f;
+	public bool ultiEnable = true;
 	public GameObject bulletPrefab;
 	public Transform gunBarrel;
 	public GameObject ulti;
 	
 	private AudioSource audioSource;
-	private float timer;
+	private float timerBullet;
+	private float timerUlti;
 	private Quaternion initialRotation;
 
 	// Use this for initialization
 	void Start ()
 	{
 		audioSource = GetComponent<AudioSource>();
-		timer = 0;
+		timerBullet = 0;
+		timerUlti = ultiActive+ultiCoolDown;
 		initialRotation = transform.rotation;
 		ulti.SetActive(false);
 	}
 
 	public void Restart()
 	{
-		timer = 0;
+		timerBullet = 0;
+		timerUlti = ultiActive+ultiCoolDown;
 		transform.rotation = initialRotation;
 		ulti.SetActive(false);
 	}
@@ -38,17 +44,32 @@ public class Robit : MonoBehaviour
 			var move = moveSpeed * Input.GetAxis("Shimmy");
 			transform.Rotate(Vector3.back, move);
 
-			timer -= Time.deltaTime;
+			timerBullet -= Time.deltaTime;
 			var shoot = Input.GetButton("Pew");
-			if (shoot && (bulletPrefab != null) && (gunBarrel != null) && ((timer <= 0) || Input.GetButtonDown("Pew")) )
+			if (shoot && (bulletPrefab != null) && (gunBarrel != null) && ((timerBullet <= 0) || Input.GetButtonDown("Pew")) )
 			{
 				Instantiate(bulletPrefab, gunBarrel.position, transform.rotation, GameController.Instance.transform);
-				timer = SecBetweenBullets;
+				timerBullet = SecBetweenBullets;
 				if (audioSource != null)
 				{
 					audioSource.Play();
 				}
 			}
+
+			timerUlti+= Time.deltaTime;
+			var laser = Input.GetButtonDown("Fire1");
+			if (laser && (ulti != null) && ultiEnable==true ){
+				ulti.SetActive(true);
+				timerUlti=0;
+				ultiEnable=false;
+			}
+			if ( (timerUlti < ultiActive+Time.deltaTime) && (timerUlti > ultiActive - Time.deltaTime) ){
+				ulti.SetActive(false);
+			}
+			if ( timerUlti > (ultiCoolDown+ultiActive) ) {
+				ultiEnable=true;
+			}
+
 		}
 	}
 }
