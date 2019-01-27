@@ -7,7 +7,10 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-	public Transform camera;
+	new public Transform camera;
+	public float cameraShakePower =0.1f;
+	public float cameraShakeInitDuration = 0.1f;
+
 	public float enemySpawnPeriod = 1;
 	public GameObject enemyPrefab;
 	public float spawnDistance = 1;
@@ -94,7 +97,7 @@ public class GameController : MonoBehaviour
 	public void LifeLost()
 	{
 		earth.GetComponent<Earth>().PlayExplosion();
-
+		StartCoroutine(CameraShake());
 
 		currentLives-=1;
 		earthRenderer.sprite = earthSprites[currentLives];
@@ -141,5 +144,17 @@ public class GameController : MonoBehaviour
 		state = State.Running;
 		startCanvas.SetActive(false);
 		endCanvas.SetActive(false);
+	}
+
+	public IEnumerator CameraShake(){
+		var CameraPos = camera.localPosition;
+		var duration= cameraShakeInitDuration;
+		while(duration > 0 ){
+			var newPos= Random.insideUnitCircle*cameraShakePower;
+			camera.localPosition=new Vector3(newPos.x, newPos.y, camera.localPosition.z);
+			duration-= Time.deltaTime;
+			yield return null;
+		}
+		camera.localPosition = CameraPos;
 	}
 }
