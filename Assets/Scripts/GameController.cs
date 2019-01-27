@@ -17,7 +17,8 @@ public class GameController : MonoBehaviour
 	public AnimationCurve difficultyCurve;
 	public Text title;
 
-	public enum State {Start, Running, GameOver};
+	public enum State {Start, Running, GameOver}
+	[NonSerialized]
 	public State state;
 
 	public static GameController Instance;
@@ -104,5 +105,6 @@ public class GameController : MonoBehaviour
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
 		state = State.Running;
+		title.text = "";
 	}
 }
