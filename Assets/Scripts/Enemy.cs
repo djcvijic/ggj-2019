@@ -32,6 +32,10 @@ public class Enemy : MonoBehaviour
 			}
 		
 		}
+		else
+		{
+			Destroy(gameObject);
+		}
 	}
 
 	private void OnTriggerEnter(Collider other)

@@ -10,17 +10,19 @@ public class GameController : MonoBehaviour
 	public GameObject enemyPrefab;
 	public float spawnDistance = 1;
 	public Transform earth;
+	public Robit robit;
 	public int EarthLives = 3;
 	public float difficultyCurveSpeed = 1;
 	public AnimationCurve difficultyCurve;
 
 	public enum State {Start, Running, GameOver};
-	public State state= State.Running;
+	public State state;
 
 	public static GameController Instance;
 
 	private float timeSinceInitialization;
 	private float timeSinceLastEnemy;
+	private int currentLives;
 
 	// Use this for initialization
 	void Start ()
@@ -28,7 +30,8 @@ public class GameController : MonoBehaviour
 		Instance = this;
 		timeSinceInitialization = 0;
 		timeSinceLastEnemy = 0;
-		state= State.Running;
+		currentLives = EarthLives;
+		state = State.Start;
 	}
 	
 	// Update is called once per frame
@@ -57,8 +60,8 @@ public class GameController : MonoBehaviour
 	{
 		// TODO
 		Debug.Log("LifeLost");
-		EarthLives-=1;
-		if(EarthLives<=0)
+		currentLives-=1;
+		if(currentLives<=0)
 		{
 			state=State.GameOver;		// game over screen
 		} 
@@ -68,5 +71,15 @@ public class GameController : MonoBehaviour
 	{
 		// TODO
 		Debug.Log("EnemyDestroyed");
+	}
+
+	private void Restart()
+	{
+		if (earth != null) earth.GetComponent<Earth>().Restart();
+		if (robit != null) robit.Restart();
+		timeSinceInitialization = 0;
+		timeSinceLastEnemy = 0;
+		currentLives = EarthLives;
+		state = State.Running;
 	}
 }

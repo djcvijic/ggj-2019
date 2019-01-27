@@ -11,9 +11,26 @@ public class Earth : MonoBehaviour
 	public Vector2 movementBounds;
 	public Transform EarthRotate;
 
+	private Vector3 initialPosition;
+	private Quaternion initialRotation;
+	private Vector3 initialBackgroundPosition;
+	private Quaternion initialEarthRotation;
+
 	// Use this for initialization
 	void Start ()
 	{
+		initialPosition = transform.position;
+		initialRotation = transform.rotation;
+		if (background != null) initialBackgroundPosition = background.position;
+		if (EarthRotate != null) initialEarthRotation = EarthRotate.rotation;
+	}
+
+	public void Restart()
+	{
+		transform.position = initialPosition;
+		transform.rotation = initialRotation;
+		if (background != null) background.position = initialBackgroundPosition;
+		if (EarthRotate != null) EarthRotate.rotation = initialEarthRotation;
 	}
 	
 	// Update is called once per frame
@@ -29,17 +46,17 @@ public class Earth : MonoBehaviour
 			var posX = Mathf.Clamp(pos.x, -movementBounds.x, movementBounds.x);
 			var posY = Mathf.Clamp(pos.y, -movementBounds.y, movementBounds.y);
 			transform.position = new Vector3(posX, posY, 0);
-			if( EarthRotate != null)
-			{
-			EarthRotate.Rotate(0, 0, Zangle);
-			}
 
 			if (background != null)
 			{
 				background.position = -paralaxAmount * transform.position;
 			}
+		}
 
-		}	
+		if (EarthRotate != null)
+		{
+			EarthRotate.Rotate(0, 0, Zangle);
+		}
 	
 	}
 }
