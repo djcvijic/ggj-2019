@@ -50,6 +50,10 @@ public class Robit : MonoBehaviour
 			{
 				Instantiate(bulletPrefab, gunBarrel.position, transform.rotation, GameController.Instance.transform);
 				timerBullet = SecBetweenBullets;
+				Earth earth =  gameObject.GetComponentInParent <Earth> ();
+				var posRobit = gunBarrel.position- transform.position;
+				earth.Shock(posRobit);
+
 				if (audioSource != null)
 				{
 					audioSource.Play();

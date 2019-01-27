@@ -10,6 +10,8 @@ public class Earth : MonoBehaviour
 	public float Zangle = -1;
 	public Vector2 movementBounds;
 	public Transform EarthRotate;
+	public float speed = 1.0f; //how fast it shakes
+	public float amount = 1.0f; //how much it shakes
 
 	private AudioSource audioSource;
 	private Vector3 initialPosition;
@@ -65,5 +67,10 @@ public class Earth : MonoBehaviour
 	public void PlayExplosion()
 	{
 		if (audioSource != null) audioSource.Play();
+		transform.position.x = Mathf.Sin(Time.time * speed) * amount;
+	}
+
+	public void Shock(Vector3 pos ){
+		transform.Translate(-moveSpeed*pos.x, -moveSpeed*pos.y, 0);
 	}
 }
