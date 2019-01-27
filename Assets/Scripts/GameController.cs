@@ -17,9 +17,6 @@ public class GameController : MonoBehaviour
 	public AnimationCurve difficultyCurve;
 	public GameObject startCanvas;
 	public GameObject endCanvas;
-	public AudioClip bulletSound;
-	public AudioClip explosionSound;
-	public AudioClip bigExplosionSound;
 
 	public enum State {Start, Running, GameOver}
 	[NonSerialized]
@@ -80,10 +77,8 @@ public class GameController : MonoBehaviour
 
 	public void LifeLost()
 	{
-		if (audioSource != null && bigExplosionSound != null)
+		if (audioSource != null)
 		{
-			audioSource.Stop();
-			audioSource.clip = bigExplosionSound;
 			audioSource.Play();
 		}
 
@@ -99,24 +94,6 @@ public class GameController : MonoBehaviour
 		state=State.GameOver;		// game over screen
 		startCanvas.SetActive(false);
 		endCanvas.SetActive(true);
-	}
-
-	public void BulletFired()
-	{
-		if (audioSource != null && bulletSound != null)
-		{
-			audioSource.clip = bulletSound;
-			audioSource.Play();
-		}
-	}
-
-	public void EnemyDestroyed()
-	{
-		if (audioSource != null && explosionSound != null)
-		{
-			audioSource.clip = explosionSound;
-			audioSource.Play();
-		}
 	}
 
 	private void Restart()
