@@ -180,9 +180,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Player one moves Erf with W/A/S/D
+  m_Text: 'Player one moves Erf with arrow keys
 
-    Player two moves Robit with O/P and fires with SPACE'
+    Player two moves Robit with O/P and fires with SPACE
+
+    Special attack with CTRL'
 --- !u!222 &64041503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -332,9 +334,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Player one moves Erf with W/A/S/D
+  m_Text: 'Player one moves Erf with arrow keys
 
-    Player two moves Robit with O/P and fires with SPACE'
+    Player two moves Robit with O/P and fires with SPACE
+
+    Special attack with CTRL'
 --- !u!222 &155586524
 CanvasRenderer:
   m_ObjectHideFlags: 0
