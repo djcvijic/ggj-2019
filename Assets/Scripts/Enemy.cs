@@ -7,10 +7,14 @@ public class Enemy : MonoBehaviour
 	public float moveSpeed = 1;
 	public Vector2 screenBounds;
 	public GameObject explosionPrefab;
+	public int maxLives = 1;
+
+	private int lives;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+	{
+		lives = maxLives;
 	}
 	
 	// Update is called once per frame
@@ -34,23 +38,33 @@ public class Enemy : MonoBehaviour
 	{
 		if (other.CompareTag("Earth"))
 		{
-			if (explosionPrefab != null)
-			{
-				Instantiate(explosionPrefab, transform.position, transform.rotation, GameController.Instance.transform);
-			}
 			GameController.Instance.LifeLost();
-			Destroy(gameObject);
+			Die();
 		}
 
 		if (other.CompareTag("Bullet"))
 		{
-			if (explosionPrefab != null)
-			{
-				Instantiate(explosionPrefab, transform.position, transform.rotation, GameController.Instance.transform);
-			}
 			GameController.Instance.EnemyDestroyed();
-			Destroy(gameObject);
 			Destroy(other.gameObject);
+			LoseHealth();
 		}
+	}
+
+	private void LoseHealth()
+	{
+		lives -= 1;
+		if (lives <= 0)
+		{
+			Die();
+		}
+	}
+
+	private void Die()
+	{
+		if (explosionPrefab != null)
+		{
+			Instantiate(explosionPrefab, transform.position, transform.rotation, GameController.Instance.transform);
+		}
+		Destroy(gameObject);
 	}
 }
