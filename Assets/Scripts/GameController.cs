@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+	public Transform camera;
 	public float enemySpawnPeriod = 1;
 	public GameObject enemyPrefab;
 	public float spawnDistance = 1;
@@ -93,6 +94,7 @@ public class GameController : MonoBehaviour
 	public void LifeLost()
 	{
 		earth.GetComponent<Earth>().PlayExplosion();
+
 
 		currentLives-=1;
 		earthRenderer.sprite = earthSprites[currentLives];
