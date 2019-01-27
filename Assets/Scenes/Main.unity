@@ -1095,8 +1095,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 519420032}
-  cameraShakePower: 0.1
-  cameraShakeInitDuration: 0.1
+  cameraShakePower: 0.2
+  cameraShakeInitDuration: 0.4
   enemySpawnPeriod: 2.5
   enemyPrefab: {fileID: 1145711847095610, guid: d1c18931eba71a04b849f76dc4a4f420,
     type: 2}
@@ -1312,7 +1312,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243382016223538664, guid: 42e1697e7811d4342b5e18348e5bd99c,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6515303c0eedf60468af972de5b8f0d8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5fe6370b57b65204a9fd430457099c6a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
