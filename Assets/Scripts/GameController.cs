@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
 	public float coverSustain = 1;
 	public float coverDecay = 1;
 
-	public enum State {Start, Running, GameOver}
+	public enum State {Wait, Start, Running, GameOver}
 	[NonSerialized]
 	public State state;
 
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
 		earthRenderer.sprite = earthSprites[currentLives];
-		state = State.Start;
+		state = State.Wait;
 		startCanvas.SetActive(false);
 		endCanvas.SetActive(false);
 		if (cover != null)
@@ -119,6 +119,7 @@ public class GameController : MonoBehaviour
 			yield return null;
 		}
 		startCanvas.SetActive(true);
+		state=State.Start;
 	}
 
 	private void GameOver() {
@@ -126,6 +127,7 @@ public class GameController : MonoBehaviour
 		state=State.GameOver;		// game over screen
 		startCanvas.SetActive(false);
 		endCanvas.SetActive(true);
+		
 	}
 
 	private void Restart()
