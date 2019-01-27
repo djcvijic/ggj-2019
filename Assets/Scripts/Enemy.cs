@@ -8,14 +8,13 @@ public class Enemy : MonoBehaviour
 	public Vector2 screenBounds;
 	public GameObject explosionPrefab;
 	public int maxLives = 1;
-
-	private AudioSource audioSource;
+	public AudioSource audioSource;
+	
 	private int lives;
 
 	// Use this for initialization
 	void Start ()
 	{
-		audioSource = GetComponent<AudioSource>();
 		lives = maxLives;
 	}
 	

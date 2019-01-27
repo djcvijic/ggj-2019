@@ -254,3 +254,4 @@ MonoBehaviour:
   screenBounds: {x: 16, y: 12}
   explosionPrefab: {fileID: 0}
   maxLives: 1
+  audioSource: {fileID: 82167373572348454}
