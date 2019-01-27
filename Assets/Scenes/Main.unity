@@ -182,7 +182,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Player one moves Erf with arrow keys
 
-    Player two moves Robit with O/P and fires with SPACE
+    Player two moves Robit with Q/E and fires with SPACE
 
     Special attack with CTRL'
 --- !u!222 &64041503
@@ -336,7 +336,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Player one moves Erf with arrow keys
 
-    Player two moves Robit with O/P and fires with SPACE
+    Player two moves Robit with Q/E and fires with SPACE
 
     Special attack with CTRL'
 --- !u!222 &155586524
