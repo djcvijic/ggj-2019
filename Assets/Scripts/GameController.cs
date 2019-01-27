@@ -75,12 +75,14 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void PlayExplosion()
+	{
+		if (audioSource != null) audioSource.Play();
+	}
+
 	public void LifeLost()
 	{
-		if (audioSource != null)
-		{
-			audioSource.Play();
-		}
+		earth.GetComponent<Earth>().PlayExplosion();
 
 		currentLives-=1;
 		if(currentLives<=0)

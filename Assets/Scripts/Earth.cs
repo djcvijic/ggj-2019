@@ -11,6 +11,7 @@ public class Earth : MonoBehaviour
 	public Vector2 movementBounds;
 	public Transform EarthRotate;
 
+	private AudioSource audioSource;
 	private Vector3 initialPosition;
 	private Quaternion initialRotation;
 	private Vector3 initialBackgroundPosition;
@@ -19,6 +20,7 @@ public class Earth : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		audioSource = GetComponent<AudioSource>();
 		initialPosition = transform.position;
 		initialRotation = transform.rotation;
 		if (background != null) initialBackgroundPosition = background.position;
@@ -58,5 +60,10 @@ public class Earth : MonoBehaviour
 			EarthRotate.Rotate(0, 0, Zangle);
 		}
 	
+	}
+
+	public void PlayExplosion()
+	{
+		if (audioSource != null) audioSource.Play();
 	}
 }

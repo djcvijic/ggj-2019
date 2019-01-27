@@ -8,8 +8,6 @@ public class Enemy : MonoBehaviour
 	public Vector2 screenBounds;
 	public GameObject explosionPrefab;
 	public int maxLives = 1;
-	public AudioSource audioSource;
-	public AudioClip audioClip;
 
 	private int lives;
 
@@ -75,11 +73,7 @@ public class Enemy : MonoBehaviour
 		{
 			Instantiate(explosionPrefab, transform.position, transform.rotation, GameController.Instance.transform);
 		}
-		if (audioSource != null && audioClip != null)
-		{
-			audioSource.clip = audioClip;
-			audioSource.Play();
-		}
+		GameController.Instance.PlayExplosion();
 		Destroy(gameObject);
 	}
 }
