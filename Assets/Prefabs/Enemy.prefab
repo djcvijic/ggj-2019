@@ -255,3 +255,4 @@ MonoBehaviour:
   explosionPrefab: {fileID: 0}
   maxLives: 1
   audioSource: {fileID: 82167373572348454}
+  audioClip: {fileID: 8300000, guid: 314428731f111964690db0deb62ac4ab, type: 3}

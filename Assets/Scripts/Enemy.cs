@@ -9,7 +9,8 @@ public class Enemy : MonoBehaviour
 	public GameObject explosionPrefab;
 	public int maxLives = 1;
 	public AudioSource audioSource;
-	
+	public AudioClip audioClip;
+
 	private int lives;
 
 	// Use this for initialization
@@ -74,8 +75,9 @@ public class Enemy : MonoBehaviour
 		{
 			Instantiate(explosionPrefab, transform.position, transform.rotation, GameController.Instance.transform);
 		}
-		if (audioSource != null)
+		if (audioSource != null && audioClip != null)
 		{
+			audioSource.clip = audioClip;
 			audioSource.Play();
 		}
 		Destroy(gameObject);
