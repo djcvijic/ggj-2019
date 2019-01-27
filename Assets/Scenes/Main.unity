@@ -1183,7 +1183,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1855011153307146, guid: 8f4b31326d3cc1645b0c7398a232b8f3,
     type: 2}
   gunBarrel: {fileID: 773104932}
-  ulti: {fileID: 1101509351}
+  ulti: {fileID: 1101509350}
 --- !u!82 &1144358812
 AudioSource:
   m_ObjectHideFlags: 0
