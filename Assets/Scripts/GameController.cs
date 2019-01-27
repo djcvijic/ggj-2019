@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
 	public AnimationCurve difficultyCurve;
 	public GameObject startCanvas;
 	public GameObject endCanvas;
+	public AudioClip bulletSound;
+	public AudioClip explosionSound;
+	public AudioClip bigExplosionSound;
 
 	public enum State {Start, Running, GameOver}
 	[NonSerialized]
@@ -24,6 +27,7 @@ public class GameController : MonoBehaviour
 
 	public static GameController Instance;
 
+	private AudioSource audioSource;
 	private float timeSinceInitialization;
 	private float timeSinceLastEnemy;
 	private int currentLives;
@@ -32,6 +36,7 @@ public class GameController : MonoBehaviour
 	void Start ()
 	{
 		Instance = this;
+		audioSource = GetComponent<AudioSource>();
 		timeSinceInitialization = 0;
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
@@ -75,6 +80,13 @@ public class GameController : MonoBehaviour
 
 	public void LifeLost()
 	{
+		if (audioSource != null && bigExplosionSound != null)
+		{
+			audioSource.Stop();
+			audioSource.clip = bigExplosionSound;
+			audioSource.Play();
+		}
+
 		currentLives-=1;
 		if(currentLives<=0)
 		{
@@ -91,14 +103,20 @@ public class GameController : MonoBehaviour
 
 	public void BulletFired()
 	{
-		// TODO
-		Debug.Log("BulletFired");
+		if (audioSource != null && bulletSound != null)
+		{
+			audioSource.clip = bulletSound;
+			audioSource.Play();
+		}
 	}
 
 	public void EnemyDestroyed()
 	{
-		// TODO
-		Debug.Log("EnemyDestroyed");
+		if (audioSource != null && explosionSound != null)
+		{
+			audioSource.clip = explosionSound;
+			audioSource.Play();
+		}
 	}
 
 	private void Restart()

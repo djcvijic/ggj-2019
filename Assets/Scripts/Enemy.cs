@@ -48,7 +48,6 @@ public class Enemy : MonoBehaviour
 
 		if (other.CompareTag("Bullet"))
 		{
-			GameController.Instance.EnemyDestroyed();
 			Destroy(other.gameObject);
 			LoseHealth();
 		}
@@ -69,6 +68,7 @@ public class Enemy : MonoBehaviour
 		{
 			Instantiate(explosionPrefab, transform.position, transform.rotation, GameController.Instance.transform);
 		}
+		GameController.Instance.EnemyDestroyed();
 		Destroy(gameObject);
 	}
 }
