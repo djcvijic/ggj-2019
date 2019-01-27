@@ -1126,6 +1126,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   startCanvas: {fileID: 1345826815}
   endCanvas: {fileID: 1531446513}
+  earthRenderer: {fileID: 921352880}
+  earthSprites:
+  - {fileID: 21300000, guid: 64c906a97972d2940b6254529a50d4b3, type: 3}
+  - {fileID: 21300000, guid: 861de359bcc24d64397ac53110c382a3, type: 3}
+  - {fileID: 21300000, guid: 1bb19d9a8e6d6494a9a779e11f5d344e, type: 3}
+  - {fileID: 21300000, guid: 2a90de727bae18245880fa5b2b1c96fa, type: 3}
 --- !u!4 &1117865427
 Transform:
   m_ObjectHideFlags: 0

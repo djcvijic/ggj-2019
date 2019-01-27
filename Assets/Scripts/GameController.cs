@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
 	public AnimationCurve difficultyCurve;
 	public GameObject startCanvas;
 	public GameObject endCanvas;
+	public SpriteRenderer earthRenderer;
+	public List<Sprite> earthSprites;
 
 	public enum State {Start, Running, GameOver}
 	[NonSerialized]
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour
 		timeSinceInitialization = 0;
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
+		earthRenderer.sprite = earthSprites[currentLives];
 		state = State.Start;
 		startCanvas.SetActive(true);
 		endCanvas.SetActive(false);
@@ -85,6 +88,7 @@ public class GameController : MonoBehaviour
 		earth.GetComponent<Earth>().PlayExplosion();
 
 		currentLives-=1;
+		earthRenderer.sprite = earthSprites[currentLives];
 		if(currentLives<=0)
 		{
 			GameOver();
@@ -105,6 +109,7 @@ public class GameController : MonoBehaviour
 		timeSinceInitialization = 0;
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
+		earthRenderer.sprite = earthSprites[currentLives];
 		RunTheAction();
 	}
 
