@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameController : MonoBehaviour
 	public int EarthLives = 3;
 	public float difficultyCurveSpeed = 1;
 	public AnimationCurve difficultyCurve;
+	public Text title;
 
 	public enum State {Start, Running, GameOver};
 	public State state;
@@ -32,27 +34,40 @@ public class GameController : MonoBehaviour
 		timeSinceLastEnemy = 0;
 		currentLives = EarthLives;
 		state = State.Start;
+		title.text = "Play";
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		var actualSpawnPeriod = enemySpawnPeriod;
-		if (difficultyCurve != null)
+		if (Instance.state == State.Running)
 		{
-			timeSinceInitialization += Time.deltaTime;
-			var difficultyTime = timeSinceInitialization * difficultyCurveSpeed;
-			actualSpawnPeriod *= 1 - difficultyCurve.Evaluate(difficultyTime);
-		}
+			var actualSpawnPeriod = enemySpawnPeriod;
+			if (difficultyCurve != null)
+			{
+				timeSinceInitialization += Time.deltaTime;
+				var difficultyTime = timeSinceInitialization * difficultyCurveSpeed;
+				actualSpawnPeriod *= 1 - difficultyCurve.Evaluate(difficultyTime);
+			}
 
-		timeSinceLastEnemy += Time.deltaTime;
-		if (timeSinceLastEnemy >= actualSpawnPeriod && enemyPrefab != null && earth != null)
+			timeSinceLastEnemy += Time.deltaTime;
+			if (timeSinceLastEnemy >= actualSpawnPeriod && enemyPrefab != null && earth != null)
+			{
+				timeSinceLastEnemy -= actualSpawnPeriod;
+				var position = spawnDistance * Random.insideUnitCircle.normalized;
+				var position3 = new Vector3(position.x, position.y, 0);
+				var rotation = Quaternion.FromToRotation(Vector3.up, earth.position - position3);
+				Instantiate(enemyPrefab, position3, rotation, transform);
+			}
+		}
+		else if (Instance.state == State.GameOver && Input.GetButtonDown("Fire1"))
 		{
-			timeSinceLastEnemy -= actualSpawnPeriod;
-			var position = spawnDistance * Random.insideUnitCircle.normalized;
-			var position3 = new Vector3(position.x, position.y, 0);
-			var rotation = Quaternion.FromToRotation(Vector3.up, earth.position - position3);
-			Instantiate(enemyPrefab, position3, rotation, transform);
+			Restart();
+		}
+		else if (Instance.state == State.Start && Input.GetButtonDown("Pew"))
+		{
+			Instance.state = State.Running;
+			title.text = "";
 		}
 	}
 
@@ -63,9 +78,17 @@ public class GameController : MonoBehaviour
 		currentLives-=1;
 		if(currentLives<=0)
 		{
-			state=State.GameOver;		// game over screen
+			GameOver();
 		} 
 	}
+
+	private void GameOver() {
+
+			state=State.GameOver;		// game over screen
+			title.text = "Game Over. Restart?";
+	}
+
+
 
 	public void EnemyDestroyed()
 	{
