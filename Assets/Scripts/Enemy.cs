@@ -12,15 +12,19 @@ public class Enemy : MonoBehaviour
 	public Sprite[] deathSprites;
 	public float deathAnimationLength = 1;
 
-	[NonSerialized]
-	public bool IsDead;
-
 	private int lives;
+	private bool isDead;
 
 	// Use this for initialization
 	void Start ()
 	{
 		lives = maxLives;
+		var rendererTransform = spriteRenderer.transform;
+		rendererTransform.rotation = Quaternion.identity;
+		if (transform.position.x > 0)
+		{
+			rendererTransform.localScale = new Vector3(-rendererTransform.localScale.x, rendererTransform.localScale.y, rendererTransform.localScale.z);
+		}
 	}
 	
 	// Update is called once per frame
@@ -46,7 +50,7 @@ public class Enemy : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (IsDead) return;
+		if (isDead) return;
 
 		if (other.CompareTag("Earth"))
 		{
@@ -82,7 +86,7 @@ public class Enemy : MonoBehaviour
 
 	private IEnumerator DieRoutine()
 	{
-		IsDead = true;
+		isDead = true;
 		GameController.Instance.PlayExplosion();
 		var frameLength = deathAnimationLength / deathSprites.Length;
 		for (var i = 0; i < deathSprites.Length; i++)
